@@ -1,4 +1,4 @@
-# Sistemas de Gerenciamento de Estudantes
+# Sistema de Gerenciamento de Estudantes
 Este é o primeiro dos projetos que irei fazer afim de treinar e estudar POO com C# e assim também poder construir meu portfólio. A ideia é ir elevando o nível a cada projeto, começando por esse mais simples.
 
 # Sobre o projeto:
