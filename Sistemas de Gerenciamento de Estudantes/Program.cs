@@ -1,29 +1,29 @@
 ﻿using Sistema_de_Gerenciamento_de_Estudantes.Aluno;
+namespace Sistemas_de_Gerenciamento_de_Estudantes;
 
 public class Program
 {
     static List<Aluno> alunos = new List<Aluno>();
     public static void Main(string[] args)
     {
-        Console.WriteLine("--------------------------");
-        Console.WriteLine("GERENCIADOR DE ESTUDANTES");
-        
-        int opcao = -1;
+        string opcao;
         do
         {
             Console.WriteLine("--------------------------");
+            Console.WriteLine("GERENCIADOR DE ESTUDANTES");
+            Console.WriteLine("--------------------------");
             Console.WriteLine("[1]Adicionar aluno\n[2]Exibir lista de alunos\n[0]Encerrar programa");
             Console.Write("--------------------------\nEscolha uma opção: ");
-            opcao = int.Parse(Console.ReadLine());
+            opcao = Console.ReadLine();
             switch (opcao)
             {
-                case 1:
+                case "1":
                     AdicionarAluno();
                     break;
-                case 2:
+                case "2":
                     ExibirListaDeAlunosEInfos();
                     break;  
-                case 0:
+                case "0":
                     Console.WriteLine("Consulta finalizada");
                     break;
 
@@ -31,8 +31,8 @@ public class Program
                     Console.WriteLine("Opção inválida, tente novamente.");
                     break;
             }
-
-        } while (opcao != 0);
+            
+        } while (opcao != "0");
 
         static void AdicionarAluno()
         {
@@ -47,29 +47,33 @@ public class Program
                 Console.Write("Digite a "+(i+1)+"a nota: ");
                 novoAluno.Notas[i] = double.Parse(Console.ReadLine());
             }
+            
+            Console.WriteLine("Matrícula gerada: "+novoAluno.Matricula);
             alunos.Add(novoAluno);
+            Console.WriteLine("Aluno adicionado com sucesso!");
+            Thread.Sleep(2000); //aguarda um 2 segs para executar o próximo comando
+            Console.Clear();
         }
         static void ExibirListaDeAlunosEInfos()
         {
             Console.WriteLine("----------------------");
-            Console.WriteLine("Lista de alunos: ");
+            Console.WriteLine("Lista de alunos e matrículas: ");
             foreach (var aluno in alunos)
             {
-                Console.WriteLine(aluno.Nome);
+                Console.WriteLine(aluno.Nome+" | "+aluno.Matricula);
             }
             Console.WriteLine("------------------------------------------------------");
-            Console.Write("Digite o nome do aluno para mostrar suas informações: ");
+            Console.Write("Digite a matrícula do aluno para mostrar suas informações: ");
             String alunoEscolhido = Console.ReadLine();
-            
-            Console.WriteLine("---------------------------");
             MostrarInfosDoAluno(alunoEscolhido);
         }
         
-        static void MostrarInfosDoAluno(string nomeAlunoEscolhido)
+        static void MostrarInfosDoAluno(string matriculaAlunoEscolhido)
         {
+            Console.WriteLine("---------------------------");
             foreach (var aluno in alunos)
             {
-                if (nomeAlunoEscolhido == aluno.Nome)
+                if (matriculaAlunoEscolhido == aluno.Matricula)
                 {
                     Console.WriteLine("Nome: " + aluno.Nome);
                     Console.WriteLine("Idade: " + aluno.Idade);
@@ -77,6 +81,9 @@ public class Program
                     {
                         Console.WriteLine("Nota "+(i+1)+": " + aluno.Notas[i]);  
                     }
+
+                    Console.WriteLine("Média: "+aluno.Media());
+                    Console.WriteLine("Matrícula: "+aluno.Matricula);
                     
                 }
                 else

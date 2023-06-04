@@ -10,8 +10,8 @@ namespace Sistema_de_Gerenciamento_de_Estudantes.Aluno
     {
         public string Nome { get; set; }
         public int Idade { get; set; }
-        private int numeroAlunos = 0; //atributo que corresponde a cada aluno (uma semi-matrícula)
-        private static int totalDeAlunos = 0; //atributo que será usado para mover o array em que conterá todos os alunos adicionados
+        public string Matricula { get; private set; }
+        public static int TotalAlunos { get; private set; }
         public double[] notas = new double[3];
         public double[] Notas
         {
@@ -36,8 +36,9 @@ namespace Sistema_de_Gerenciamento_de_Estudantes.Aluno
         }
         public Aluno()
         {
-            totalDeAlunos++;
-            this.numeroAlunos = totalDeAlunos;
+            TotalAlunos++;
+            Random random = new Random();
+            Matricula = TotalAlunos+random.Next(3000, 3999).ToString();
         }
     }
 }
