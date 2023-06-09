@@ -10,7 +10,7 @@ namespace Sistema_de_Gerenciamento_de_Estudantes.Aluno
     {
         public string Nome { get; set; }
         public int Idade { get; set; }
-        public string Matricula { get; private set; }
+        public string Matricula { get; }
         public static int TotalAlunos { get; private set; }
         public double[] notas = new double[3];
         public double[] Notas
@@ -18,9 +18,9 @@ namespace Sistema_de_Gerenciamento_de_Estudantes.Aluno
             get { return notas; }
             set
             {
-                if (value.Length != 3)
+                if (value.Length != 3) //valida o tamanho do array
                 {
-                    throw new ArgumentException("O número máximo de notas é 3.");
+                    throw new ArgumentException("Apenas 3 notas podem ser cadastradassss");
                 }
                 notas = value;
             }
@@ -34,11 +34,11 @@ namespace Sistema_de_Gerenciamento_de_Estudantes.Aluno
             }
             return soma / 3;
         }
+        Random numeroAleatorio = new Random();
         public Aluno()
         {
             TotalAlunos++;
-            Random random = new Random();
-            Matricula = TotalAlunos+random.Next(3000, 3999).ToString();
+            Matricula = TotalAlunos+numeroAleatorio.Next(3000, 3999).ToString();
         }
     }
 }

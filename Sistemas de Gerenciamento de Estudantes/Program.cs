@@ -40,7 +40,32 @@ public class Program
             Console.Write("Nome do aluno: ");
             novoAluno.Nome = Console.ReadLine();
             Console.Write("Idade do aluno: ");
-            novoAluno.Idade = int.Parse(Console.ReadLine());
+            bool idadeValida = false;
+            while (idadeValida == false)
+            {
+                try
+                {
+                    int idade = int.Parse(Console.ReadLine());
+
+                    if (idade >= 1 && idade <= 100)
+                    {
+                        novoAluno.Idade = idade;
+                        idadeValida = true;
+                    }
+                    else
+                    {
+                        Console.Write("Idade inválida. Digite uma idade entre 1 e 100 anos: ");
+                        // Solicite que o usuário insira novamente a idade ou tome uma ação apropriada.
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.Write("Idade inválida. Digite um número inteiro válido: ");
+                    // Solicite que o usuário insira novamente a idade ou tome uma ação apropriada.
+                }
+            }
+            
+            
 
             for (int i = 0; i < 3; i++)
             {
@@ -63,10 +88,25 @@ public class Program
                 Console.WriteLine(aluno.Nome+" | "+aluno.Matricula);
             }
             Console.WriteLine("------------------------------------------------------");
-            Console.Write("Digite a matrícula do aluno para mostrar suas informações: ");
-            String alunoEscolhido = Console.ReadLine();
-            MostrarInfosDoAluno(alunoEscolhido);
-        }
+            bool matriculaValida = false;
+            while (matriculaValida == false)
+            {
+                Console.Write("Digite a matrícula do aluno para mostrar suas informações: ");
+                String matriculaEscolhida = Console.ReadLine();
+            
+            
+                foreach (var aluno in alunos)
+                {
+                    if (matriculaEscolhida == aluno.Matricula)
+                    {
+                        MostrarInfosDoAluno(matriculaEscolhida);
+                        matriculaValida = true;
+                    }    
+                }
+            
+            } 
+            }
+            
         
         static void MostrarInfosDoAluno(string matriculaAlunoEscolhido)
         {
@@ -88,7 +128,7 @@ public class Program
                 }
                 else
                 {
-                    Console.WriteLine("Nome de aluno inválido, tente nomes que estão na lista!");
+                    Console.WriteLine("Matrícula não encontrada. Tente números de matrícula que estão na lista!");
                 }
             }
         }
