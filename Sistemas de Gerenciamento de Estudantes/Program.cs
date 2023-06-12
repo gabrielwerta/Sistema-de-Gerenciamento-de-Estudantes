@@ -21,7 +21,17 @@ public class Program
                     AdicionarAluno();
                     break;
                 case "2":
-                    ExibirListaDeAlunosEInfos();
+                    if (Aluno.TotalAlunos > 0) // valida se há alunos para ser mostrado
+                    {
+                        ExibirListaDeAlunosEInfos();
+                    }
+                    else
+                    {
+                        Console.WriteLine("Não há alunos cadastrados! Adione um aluno...");
+                        Thread.Sleep(2500); //aguarda um 2 segs para executar o próximo comando
+                        Console.Clear();
+                    }
+                    
                     break;  
                 case "0":
                     Console.WriteLine("Consulta finalizada");
@@ -76,36 +86,40 @@ public class Program
             Console.WriteLine("Matrícula gerada: "+novoAluno.Matricula);
             alunos.Add(novoAluno);
             Console.WriteLine("Aluno adicionado com sucesso!");
-            Thread.Sleep(2000); //aguarda um 2 segs para executar o próximo comando
+            Thread.Sleep(2500); //aguarda um 3 segs para executar o próximo comando
             Console.Clear();
         }
         static void ExibirListaDeAlunosEInfos()
         {
+            Thread.Sleep(1000); //aguarda um 1 segs para executar o próximo comando
+            Console.Clear();
             Console.WriteLine("----------------------");
             Console.WriteLine("Lista de alunos e matrículas: ");
             foreach (var aluno in alunos)
             {
                 Console.WriteLine(aluno.Nome+" | "+aluno.Matricula);
             }
-            Console.WriteLine("------------------------------------------------------");
+            Console.WriteLine("----------------------");
             bool matriculaValida = false;
             while (matriculaValida == false)
             {
                 Console.Write("Digite a matrícula do aluno para mostrar suas informações: ");
                 String matriculaEscolhida = Console.ReadLine();
             
-            
+                //foreach que verifica se há algum aluno com o número de matricula digitado
                 foreach (var aluno in alunos)
                 {
                     if (matriculaEscolhida == aluno.Matricula)
                     {
+                        Thread.Sleep(1000); //aguarda um 1 segs para executar o próximo comando
+                        Console.Clear();
                         MostrarInfosDoAluno(matriculaEscolhida);
                         matriculaValida = true;
                     }    
                 }
             
             } 
-            }
+        }
             
         
         static void MostrarInfosDoAluno(string matriculaAlunoEscolhido)
@@ -126,10 +140,7 @@ public class Program
                     Console.WriteLine("Matrícula: "+aluno.Matricula);
                     
                 }
-                else
-                {
-                    Console.WriteLine("Matrícula não encontrada. Tente números de matrícula que estão na lista!");
-                }
+
             }
         }
     }
